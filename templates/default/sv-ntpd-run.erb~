@@ -1,0 +1,4 @@
+ #!/bin/sh
+ MEM=`head -1 ./env/MEM`
+ exec softlimit -m "${MEM}" \
+   ntpd -n

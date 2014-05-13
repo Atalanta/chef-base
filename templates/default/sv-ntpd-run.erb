@@ -1,0 +1,3 @@
+#!/bin/sh
+. /etc/default/ntp
+exec chpst -u ntp /usr/sbin/ntpd -n "$NTPD_OPTS"
