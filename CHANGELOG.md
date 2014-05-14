@@ -6,6 +6,12 @@ This file is used to list changes made in each version of base.
 
 * Initial release of base
 
+## 0.2.0:
+
+- Pulling out into separate repo
+- Bringing delete validation key out of chef-client cookbook
+- Adding git, telnet, rsync
+
 - - -
 Check the [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/syntax) for help with Markdown.
 

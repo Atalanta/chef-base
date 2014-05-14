@@ -17,18 +17,26 @@
 # limitations under the License.
 #
 
-execute "Mount SElinux" do
-  command "mount -t selinuxfs none /selinux"
-  not_if { %x[sestatus].split("\n").select { |l| l =~ /mount/ }.first.match /\/selinux$/ }
+include_recipe "selinux::disabled"
+
+class ::Chef::Recipe
+  include ::Opscode::ChefClient::Helpers
 end
 
-include_recipe "selinux::permissive"
-#include_recipe "chef-client"
-include_recipe "chef-client::delete_validation"
-include_recipe "simple_iptables"
+unless chef_server?
+  file Chef::Config[:validation_key] do
+    action :delete
+    backup false
+    only_if { ::File.exists?(Chef::Config[:client_key]) }
+  end
+end
 
 package "ntp"
 package "cronie"
+package "screen"
+package "git"
+package "telnet"
+package "rsync"
 
 unless ::File.symlink?("/etc/localtime")
   execute "Move old localtime" do
