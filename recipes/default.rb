@@ -18,18 +18,7 @@
 #
 
 include_recipe "selinux::disabled"
-
-class ::Chef::Recipe
-  include ::Opscode::ChefClient::Helpers
-end
-
-unless chef_server?
-  file Chef::Config[:validation_key] do
-    action :delete
-    backup false
-    only_if { ::File.exists?(Chef::Config[:client_key]) }
-  end
-end
+include_recipe "chef-client::delete_validation"
 
 package "ntp"
 package "cronie"

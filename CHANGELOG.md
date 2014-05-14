@@ -12,6 +12,10 @@ This file is used to list changes made in each version of base.
 - Bringing delete validation key out of chef-client cookbook
 - Adding git, telnet, rsync
 
+## 0.2.1:
+
+- Reverting to using delete_validation from upstream
+
 - - -
 Check the [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/syntax) for help with Markdown.
 
