@@ -16,6 +16,10 @@ This file is used to list changes made in each version of base.
 
 - Reverting to using delete_validation from upstream
 
+## 0.2.2:
+
+- Include user cookbook
+
 - - -
 Check the [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/syntax) for help with Markdown.
 

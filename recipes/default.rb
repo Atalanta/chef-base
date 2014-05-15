@@ -17,15 +17,14 @@
 # limitations under the License.
 #
 
-include_recipe "selinux::disabled"
-include_recipe "chef-client::delete_validation"
+include_recipe 'user'
+include_recipe 'user::data_bag'
+include_recipe 'selinux::disabled'
+include_recipe 'chef-client::delete_validation'
 
-package "ntp"
-package "cronie"
-package "screen"
-package "git"
-package "telnet"
-package "rsync"
+%w{ ntp cronie screen git telnet rsync }.each do |packagename|
+  package packagename
+end
 
 unless ::File.symlink?("/etc/localtime")
   execute "Move old localtime" do
