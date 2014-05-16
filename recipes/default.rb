@@ -21,8 +21,9 @@ include_recipe 'user'
 include_recipe 'user::data_bag'
 include_recipe 'selinux::disabled'
 include_recipe 'chef-client::delete_validation'
+include_recipe 'sudo'
 
-%w{ ntp cronie screen git telnet rsync }.each do |packagename|
+%w{ unzip ntp cronie screen git telnet rsync }.each do |packagename|
   package packagename
 end
 

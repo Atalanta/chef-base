@@ -20,6 +20,9 @@ This file is used to list changes made in each version of base.
 
 - Include user cookbook
 
+## 0.2.3:
+
+- Add sudoers support
 - - -
 Check the [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/syntax) for help with Markdown.
 
