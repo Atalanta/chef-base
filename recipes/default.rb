@@ -23,7 +23,7 @@ include_recipe 'selinux::disabled'
 include_recipe 'chef-client::delete_validation'
 include_recipe 'sudo'
 
-%w{ unzip ntp cronie screen git telnet rsync }.each do |packagename|
+%w{ emacs unzip ntp cronie wget screen git telnet rsync }.each do |packagename|
   package packagename
 end
 

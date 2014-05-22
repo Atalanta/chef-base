@@ -23,6 +23,10 @@ This file is used to list changes made in each version of base.
 ## 0.2.3:
 
 - Add sudoers support
+
+## 0.2.4:
+
+- Add emacs and wget to handy things
 - - -
 Check the [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/syntax) for help with Markdown.
 
