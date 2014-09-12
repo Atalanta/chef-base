@@ -2,9 +2,25 @@
 
 This file is used to list changes made in each version of base.
 
-## 0.1.0:
+## 0.2.5
 
-* Initial release of base
+- Modify: turn base cookbook into LWRP.
+
+## 0.2.4:
+
+- Add emacs and wget to handy things
+
+## 0.2.3:
+
+- Add sudoers support
+
+## 0.2.2:
+
+- Include user cookbook
+
+## 0.2.1:
+
+- Reverting to using delete_validation from upstream
 
 ## 0.2.0:
 
@@ -12,21 +28,10 @@ This file is used to list changes made in each version of base.
 - Bringing delete validation key out of chef-client cookbook
 - Adding git, telnet, rsync
 
-## 0.2.1:
+## 0.1.0:
 
-- Reverting to using delete_validation from upstream
+* Initial release of base
 
-## 0.2.2:
-
-- Include user cookbook
-
-## 0.2.3:
-
-- Add sudoers support
-
-## 0.2.4:
-
-- Add emacs and wget to handy things
 - - -
 Check the [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/syntax) for help with Markdown.
 
