@@ -10,7 +10,8 @@ version          '0.2.5'
   supports os
 end
 
+depends 'hostsfile', '~> 2.4.5'
+
 # %w{ sudo user chef-client selinux }.each do |cb|
 #   depends cb
 # end
-
