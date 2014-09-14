@@ -12,4 +12,20 @@ describe 'base cookbook LWRP' do
       expect(file '/etc/hosts').to contain 'test.example.com'
     end
   end
+  context 'emacs attribute' do
+    it 'installs emacs' do
+      expect(command 'emacs --version').to return_stdout /GNU\ Emacs/
+    end
+  end
+  context 'git attribute' do
+    it 'installs git' do
+      expect(command 'git --version').to return_stdout /git\ version/
+    end
+  end
+  context 'tmux attribute' do
+    it 'installs tmux' do
+      expect(command 'tmux -V').to return_stdout /tmux\ 1\./
+    end
+  end
+
 end

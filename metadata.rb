@@ -6,9 +6,7 @@ description      'Installs/Configures base'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '0.2.5'
 
-%w{debian ubuntu}.each do |os|
-  supports os
-end
+supports 'ubuntu', ">= 14.04"
 
 depends 'hostsfile', '~> 2.4.5'
 

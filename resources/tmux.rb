@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: base
-# Provider:: default
+# Resource:: tmux
 #
 # Copyright 2013-2014, Atalanta Systems Ltd
 #
@@ -17,23 +17,8 @@
 # limitations under the License.
 #
 
-def whyrun_supported?
-  true
-end
+actions :install
+default_action :install
 
-use_inline_resources
-
-action :config do
-
-  # Set node hostname
-  base_hostname new_resource.hostname if new_resource.hostname
-
-  package 'emacs24-nox' if new_resource.emacs
-  package 'git' if new_resource.git
-
-  base_tmux new_resource.tmux_prefix_key do
-    cookbook new_resource.tmux_cookbook
-  end if new_resource.tmux
-  
-  new_resource.updated_by_last_action(true)
-end
+attribute :prefix_key, :kind_of => String, :name_attribute => true, :default => 'C-z'
+attribute :cookbook, :kind_of => String, :default => 'base'

@@ -1,0 +1,23 @@
+set-option -g prefix <%= @prefix_key %>
+unbind-key C-b
+bind-key <%= @prefix_key %> send-prefix
+bind-key <%= @prefix_key %> last-window
+
+set-option -sg  escape-time 0
+
+# statusbar
+set -g   status-utf8 on
+set -g   status-interval 1
+set -g   status-justify left
+set -g   status-left-length 15
+set -g   status-left '#[fg=green][ #h ]['
+set -g   status-right ' #[fg=green]][ #[fg=blue]%d/%m #[fg=white]%H:%M #[fg=green]]'
+
+# default statusbar colors
+set -g   status-fg white
+set -g   status-bg black
+set -g   status-attr bright
+set -g   status-keys emacs
+
+setw -g window-status-format ' #I:#W '
+setw -g window-status-current-format '#[fg=red](#[fg=default] #I:#W #[fg=red])#[fg=default]'

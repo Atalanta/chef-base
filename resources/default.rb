@@ -20,9 +20,13 @@
 actions :config
 default_action :config
 
-attribute :hostname, :kind_of => String, :name_attribute => true, :default => "unassigned.local"
+attribute :hostname, :kind_of => [String, NilClass], :name_attribute => true, :default => "unassigned.local"
 attribute :system_user, :kind_of => [TrueClass, FalseClass, NilClass], :default => 'devops'
 attribute :bashd, :kind_of => [TrueClass, FalseClass, NilClass], :default => true
 attribute :users, :kind_of => [TrueClass, FalseClass, NilClass], :default => nil
 attribute :ssh, :kind_of => [TrueClass, FalseClass, NilClass], :default => nil
-attribute :tmux, :kind_of => [TrueClass, FalseClass, NilClass], :default => nil
+attribute :tmux, :kind_of => [TrueClass, FalseClass, NilClass], :default => true
+attribute :tmux_prefix_key, :kind_of => String, :default => 'C-z'
+attribute :tmux_cookbook, :kind_of => String, :default => 'base'
+attribute :emacs, :kind_of => [TrueClass, FalseClass, NilClass], :default => true
+attribute :git, :kind_of => [TrueClass, FalseClass, NilClass], :default => true
