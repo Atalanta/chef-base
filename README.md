@@ -51,6 +51,13 @@ Just include `base` in your node's `run_list`:
 }
 ```
 
+Tests
+-----
+
+### system_user
+
+* Have password: test
+
 Contributing
 ------------
 TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.

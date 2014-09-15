@@ -1,0 +1,8 @@
+{
+  "id": "devop",
+  "groups": [ "devops" ],
+  "shell": "\/bin\/bash",
+  "comment": "System user",
+  "password": "$6$LJe018YObfgZRF$dEAPxJdRx2iFitC0LR7842NDjBSvnW4V6lIY1LhvyKPnQQMkrqya8psPTdBjBGS6dcJBZjyLIm8wdQJJMzoKt1",
+  "ssh_keys": ["ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCriOsxymej+RLqGGJXhP0j5s06E0hA9GyORdZzzJx41roRUYcGwRVLYGhxtP+fKTXmNszEsuxYsyr0OQ7dwRjOEa+LOGPXx1JROzGU00tt3PuDvPMuFpjL0wuq754TsIWcTyDgiWdtd5vTHAdrTc0ZghNSFHNONqtLddQIE2p+YCfnmvBsrmRjt517m37ua87G7WNOiAqV/oDhO8CKfHDZuvRVHu77dFciIT0SXK+a0Xw7A3DbrkENWfRFA+OlmOafWrxSO705RC2S8SNSpIVX092KUYNGXhY3489F3VkHW1hBm2kOQUECnzkJGcbRajAjJZiBRnkOqSM3/aDPt7cL jakshi@gehilfe"]
+}

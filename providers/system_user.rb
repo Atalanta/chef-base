@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: base
-# Provider:: default
+# Provider:: system_user
 #
 # Copyright 2013-2014, Atalanta Systems Ltd
 #
@@ -17,29 +17,32 @@
 # limitations under the License.
 #
 
-include Chef::DSL::IncludeRecipe
-
 def whyrun_supported?
   true
 end
 
 use_inline_resources
 
-action :config do
+action :create do
 
-  # Set node hostname
-  base_hostname new_resource.hostname if new_resource.hostname
+  # Install system_user
+  if new_resource.group
+    users_manage new_resource.group do
+      group_id 2411
+      action [ :remove, :create ]
+    end
 
-  package 'emacs24-nox' if new_resource.emacs
-  package 'git' if new_resource.git
+    package 'sudo'
 
-  base_tmux new_resource.tmux_prefix_key do
-    cookbook new_resource.tmux_cookbook
-  end if new_resource.tmux
+    sudo 'devops' do
+      group '%devops'
+      nopasswd true
+      defaults ['!requiretty','env_reset']
+    end
+    
+    new_resource.updated_by_last_action(true)
+  end
 
-  base_system_user new_resource.system_user if new_resource.system_user
-
-  include_recipe 'chef-client::delete_validation' if new_resource.delete_validation
-  
-  new_resource.updated_by_last_action(true)
 end
+
+  

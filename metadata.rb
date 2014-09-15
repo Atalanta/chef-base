@@ -9,7 +9,10 @@ version          '0.2.5'
 supports 'ubuntu', ">= 14.04"
 
 depends 'hostsfile', '~> 2.4.5'
+depends 'users', '~> 1.7.0'
+depends 'sudo', '~> 2.7.0'
+depends 'chef-client', '~> 3.8.0'
 
-# %w{ sudo user chef-client selinux }.each do |cb|
+# %w{ chef-client selinux }.each do |cb|
 #   depends cb
 # end
