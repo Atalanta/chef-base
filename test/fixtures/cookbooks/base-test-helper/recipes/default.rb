@@ -17,4 +17,30 @@
 # limitations under the License.
 #
 
+require 'pathname'
+
+class ::Chef::Recipe
+  include ::Opscode::ChefClient::Helpers
+end
+
 base 'test.example.com'
+
+directory Pathname(node['chef']['dump']['config']).dirname.to_s do
+  recursive true
+end
+
+file node['chef']['dump']['config'] do
+  owner "root"
+  mode "0400"
+end
+
+
+ruby_block 'dump_chef_client_config' do
+  block do
+    require 'json'
+
+    validation_hash = { :validation_key => Chef::Config[:validation_key] }
+    
+    File.open(node['chef']['dump']['config'], 'w') { |file| file.write(JSON.pretty_generate(validation_hash, {allow_nan: true })) }
+  end
+end

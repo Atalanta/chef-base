@@ -16,3 +16,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+default['chef']['dump']['config'] = '/tmp/serverspec/chef_config.json'

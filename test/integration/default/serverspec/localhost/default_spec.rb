@@ -39,4 +39,9 @@ describe 'base cookbook LWRP' do
       expect(file '/etc/sudoers.d/devops').to contain '%devops  ALL=(ALL) NOPASSWD:ALL'
     end
   end
+  context 'delete_validation attribute' do
+    it "deletes #{$chef_config['validation_key']} file" do
+      expect(file $chef_config['validation_key']).not_to be_file
+    end
+  end
 end
