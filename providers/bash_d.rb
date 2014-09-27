@@ -40,6 +40,7 @@ action :create do
 
   template "#{buser_home}/.bash.d/#{new_resource.snippet}.sh" do
     cookbook new_resource.cookbook if new_resource.cookbook
+    source new_resource.template if new_resource.template
     mode 0755
     user buser
     group buser
@@ -52,7 +53,7 @@ action :remove do
   buser_home = Etc.getpwnam(new_resource.user).dir
 
   file "#{buser_home}/.bash.d/#{new_resource.snippet}.sh" do
-    action :remove
+    action :delete
   end
 end
 

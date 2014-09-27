@@ -44,4 +44,18 @@ describe 'base cookbook LWRP' do
       expect(file $chef_config['validation_key']).not_to be_file
     end
   end
+  context 'bash_d attribute' do
+    it 'creates /home/devop/.bash.d dir' do
+      expect(file '/home/devop/.bash.d').to be_directory
+    end
+    it 'adds include ~/.bash.d snipplets command to .bashrc' do
+      expect(file '/home/devop/.bashrc').to contain 'for include in ~/.bash.d/*.sh; do source ${include} 2>/dev/null; done'
+    end
+    it 'creates snipplet' do
+      expect(file '/home/devop/.bash.d/test1.sh').to contain 'echo \'snippet 1\''
+    end
+    it 'deletes snipplet' do
+      expect(file '/home/devop/.bash.d/test2.sh').not_to be_file      
+    end
+  end
 end

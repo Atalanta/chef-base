@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: base-test-helper
-# Recipe:: default
+# Recipe:: bash_d_lwrp_test_commands
 #
 # Copyright 2013-2014, Atalanta Systems Ltd
 #
@@ -17,7 +17,17 @@
 # limitations under the License.
 #
 
-base 'test.example.com'
+base_bash_d 'devop' do
+  snippet 'test1'
+  action :create
+end
 
-include_recipe 'base-test-helper::dump_validation_key_path'
-include_recipe 'base-test-helper::bash_d_lwrp_test_commands'
+base_bash_d 'devop' do
+  snippet 'test2'
+  action :create
+end
+
+base_bash_d 'devop' do
+  snippet 'test2'
+  action :remove
+end

@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: base-test-helper
-# Recipe:: default
+# Recipe:: dump_validation_key_path
 #
 # Copyright 2013-2014, Atalanta Systems Ltd
 #
@@ -17,7 +17,28 @@
 # limitations under the License.
 #
 
-base 'test.example.com'
+require 'pathname'
 
-include_recipe 'base-test-helper::dump_validation_key_path'
-include_recipe 'base-test-helper::bash_d_lwrp_test_commands'
+class ::Chef::Recipe
+  include ::Opscode::ChefClient::Helpers
+end
+
+directory Pathname(node['chef']['dump']['config']).dirname.to_s do
+  recursive true
+end
+
+file node['chef']['dump']['config'] do
+  owner "root"
+  mode "0400"
+end
+
+
+ruby_block 'dump_chef_client_config' do
+  block do
+    require 'json'
+
+    validation_hash = { :validation_key => Chef::Config[:validation_key] }
+    
+    File.open(node['chef']['dump']['config'], 'w') { |file| file.write(JSON.pretty_generate(validation_hash, {allow_nan: true })) }
+  end
+end

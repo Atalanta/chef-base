@@ -21,6 +21,7 @@ actions :install, :create, :remove
 default_action :install
 
 attribute :user, :kind_of => [String, NilClass], :name_attribute => true, :default => nil
-attribute :snippet_name, :kind_of => [String, NilClass], :default => nil
+attribute :snippet, :kind_of => [String, NilClass], :default => nil
 attribute :cookbook, :kind_of => [String, NilClass], :default => nil
+attribute :template, :kind_of => [String, NilClass], :default => nil
 attribute :variables, :kind_of => Hash, :default => {}
