@@ -26,7 +26,7 @@ attribute :hostname, :kind_of => [String, NilClass], :name_attribute => true, :d
 attribute :system_user, :kind_of => [String, FalseClass, NilClass], :default => 'devops'
 attribute :users, :kind_of => [TrueClass, FalseClass, NilClass], :default => nil
 # features
-attribute :bashd, :kind_of => [TrueClass, FalseClass, NilClass], :default => true
+attribute :bash_d, :kind_of => [TrueClass, FalseClass, NilClass], :default => true
 attribute :ssh, :kind_of => [TrueClass, FalseClass, NilClass], :default => nil
 attribute :delete_validation,  :kind_of => [TrueClass, FalseClass, NilClass], :default => true
 # packages

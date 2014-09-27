@@ -25,6 +25,13 @@ end
 
 use_inline_resources
 
+def chef_solo_search_installed?
+  klass = ::Search::const_get('Helper')
+  return klass.is_a?(Class)
+rescue NameError
+  return false
+end
+
 action :config do
 
   # Set node hostname
@@ -37,9 +44,21 @@ action :config do
     cookbook new_resource.tmux_cookbook
   end if new_resource.tmux
 
-  base_system_user new_resource.system_user if new_resource.system_user
-
-  include_recipe 'chef-client::delete_validation' if new_resource.delete_validation
+  if new_resource.system_user
+    base_system_user new_resource.system_user
+    if new_resource.bash_d
+      if Chef::Config[:solo] and not chef_solo_search_installed?
+        Chef::Log.warn("This recipe uses search. Chef Solo does not support search unless you install the chef-solo-search cookbook.")
+      else
+        search('users', "groups:devops") do |u|
+          u['username'] ||= u['id']
+          base_bash_d u['username']
+        end  
+      end
+    end
+  end
   
+  include_recipe 'chef-client::delete_validation' if new_resource.delete_validation
+
   new_resource.updated_by_last_action(true)
 end
