@@ -50,7 +50,7 @@ action :config do
       if Chef::Config[:solo] and not chef_solo_search_installed?
         Chef::Log.warn("This recipe uses search. Chef Solo does not support search unless you install the chef-solo-search cookbook.")
       else
-        search('users', "groups:devops") do |u|
+        search('users', "groups:#{new_resource.system_user}") do |u|
           u['username'] ||= u['id']
           base_bash_d u['username']
         end  
