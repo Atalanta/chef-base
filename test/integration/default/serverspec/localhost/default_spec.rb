@@ -36,7 +36,7 @@ describe 'base cookbook LWRP' do
     end
     it 'gives devop user passwordless sudo' do
       expect(file '/etc/sudoers').to contain '#includedir /etc/sudoers.d'
-      expect(file '/etc/sudoers.d/devops').to contain '%devops  ALL=(ALL) NOPASSWD:ALL'
+      expect((file '/etc/sudoers.d/devops').content).to match /\%devops\s+ALL\=\(ALL\)\s+NOPASSWD\:ALL/
     end
   end
   context 'delete_validation attribute' do

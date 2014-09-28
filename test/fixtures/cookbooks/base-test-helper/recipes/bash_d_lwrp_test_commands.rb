@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 #
 # Cookbook Name:: base-test-helper
 # Recipe:: bash_d_lwrp_test_commands

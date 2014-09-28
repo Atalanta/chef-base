@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 #
 # Cookbook Name:: base-test-helper
 # Recipe:: dump_validation_key_path

@@ -44,5 +44,3 @@ action :create do
   end
 
 end
-
-  

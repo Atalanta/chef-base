@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 name             'base'
 maintainer       'Atalanta Systems Ltd'
 maintainer_email 'support@atalanta-systems.com'
