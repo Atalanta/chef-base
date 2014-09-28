@@ -34,8 +34,8 @@ action :create do
 
     package 'sudo'
 
-    sudo 'devops' do
-      group '%devops'
+    sudo new_resource.group do
+      group "%#{new_resource.group}"
       nopasswd true
       defaults ['!requiretty','env_reset']
     end
