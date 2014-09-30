@@ -17,22 +17,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-# unless ::File.symlink?("/etc/localtime")
-#   execute "Move old localtime" do
-#     command "mv /etc/localtime /etc/localtime.bk"
-#   end
-# end
-
-# service "crond" do
-#   action [:enable, :start]
-# end
-
-# link "/etc/localtime" do
-#   to "/usr/share/zoneinfo/GB"
-# end
-  
-# cron "Synchronise Time" do
-#   command "/usr/sbin/ntpd -q"
-#   minute "10"
-# end

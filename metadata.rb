@@ -13,7 +13,3 @@ depends 'hostsfile', '~> 2.4.5'
 depends 'users', '~> 1.7.0'
 depends 'sudo', '~> 2.7.0'
 depends 'chef-client', '~> 3.8.0'
-
-# %w{ chef-client selinux }.each do |cb|
-#   depends cb
-# end
