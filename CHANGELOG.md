@@ -2,6 +2,14 @@
 
 This file is used to list changes made in each version of base.
 
+## 0.2.7
+
+- Add: Installing ntpd and setting host clocks to UTC
+
+## 0.2.6
+
+- Add: possibility to use any user/group name for system user
+
 ## 0.2.5
 
 - Modify: turn base cookbook into LWRP.

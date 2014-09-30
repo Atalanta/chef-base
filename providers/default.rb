@@ -45,6 +45,8 @@ action :config do
     cookbook new_resource.tmux_cookbook
   end if new_resource.tmux
 
+  base_ntp 'UTC' if new_resource.ntp
+    
   if new_resource.system_user
     base_system_user new_resource.system_user
     if new_resource.bash_d

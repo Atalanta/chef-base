@@ -51,11 +51,22 @@ describe 'base cookbook LWRP' do
     it 'adds include ~/.bash.d snipplets command to .bashrc' do
       expect(file '/home/devop/.bashrc').to contain 'for include in ~/.bash.d/*.sh; do source ${include} 2>/dev/null; done'
     end
-    it 'creates snipplet' do
+    it 'can create snipplet' do
       expect(file '/home/devop/.bash.d/test1.sh').to contain 'echo \'snippet 1\''
     end
-    it 'deletes snipplet' do
+    it 'can delete snipplet' do
       expect(file '/home/devop/.bash.d/test2.sh').not_to be_file      
+    end
+  end
+  context 'ntp attribute' do
+    it 'setups UTC timezone' do
+      expect(command 'date +%Z').to return_stdout 'UTC'
+    end
+    it 'installs ntpd' do
+      expect(command 'ntpd --version').to return_stdout /ntpd\ /
+    end
+    it 'configure cron to sync time every hour' do
+      expect(cron).to have_entry('10 * * * * /usr/sbin/ntpd -q')
     end
   end
 end

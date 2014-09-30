@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 #
 # Cookbook Name:: base
-# Recipe:: default
+# Resource:: ntp
 #
 # Copyright 2013-2014, Atalanta Systems Ltd
 #
@@ -18,21 +18,7 @@
 # limitations under the License.
 #
 
-# unless ::File.symlink?("/etc/localtime")
-#   execute "Move old localtime" do
-#     command "mv /etc/localtime /etc/localtime.bk"
-#   end
-# end
+actions :config
+default_action :config
 
-# service "crond" do
-#   action [:enable, :start]
-# end
-
-# link "/etc/localtime" do
-#   to "/usr/share/zoneinfo/GB"
-# end
-  
-# cron "Synchronise Time" do
-#   command "/usr/sbin/ntpd -q"
-#   minute "10"
-# end
+attribute :timezone, :kind_of => [String, NilClass], :name_attribute => true, :default => 'UTC'

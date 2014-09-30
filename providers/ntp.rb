@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 #
 # Cookbook Name:: base
-# Recipe:: default
+# Provider:: bash_d
 #
 # Copyright 2013-2014, Atalanta Systems Ltd
 #
@@ -18,21 +18,34 @@
 # limitations under the License.
 #
 
-# unless ::File.symlink?("/etc/localtime")
-#   execute "Move old localtime" do
-#     command "mv /etc/localtime /etc/localtime.bk"
-#   end
-# end
+require 'etc'
 
-# service "crond" do
-#   action [:enable, :start]
-# end
+def whyrun_supported?
+  true
+end
 
-# link "/etc/localtime" do
-#   to "/usr/share/zoneinfo/GB"
-# end
+use_inline_resources
+
+action :config do
+
+  # Set timezone
+  file '/etc/timezone' do
+    mode 0644
+    content new_resource.timezone
+  end
+
+  execute 'set host timezone' do
+    command 'dpkg-reconfigure --frontend noninteractive tzdata'
+  end
+
+  # Install ntp
+  package 'ntp'
+
+  # sync time with ntpd once a hour
+  cron 'time_sync' do
+    minute '10'
+    command '/usr/sbin/ntpd -q'
+  end
   
-# cron "Synchronise Time" do
-#   command "/usr/sbin/ntpd -q"
-#   minute "10"
-# end
+  new_resource.updated_by_last_action(true)
+end
