@@ -2,14 +2,14 @@
 
 * This is a cookbook with base LWRP provider. 
 * It contains LWRP provider for setup base packages and do basic system configuration.
-* default base provider contains reasonable defaults.
-* Some features can be used independently, using sub-providers. Sometimes that gives you more attributes to control. 
+* default base LWRP contains reasonable defaults.
+* Some features can be used independently, using sub-LWRP. Some of them have more attributes to configure. 
 
 ## Features
 
 * set node hostname
 * set system user
-* set .bash.d folder for bash snippets, and include all *.sh files from the folder in .bashrc file.
+* set **.bash.d** folder for bash snippets, and include all ***.sh** files from the folder in .bashrc file.
 * delete validation file for better security (use with caution)
 * set host's timezone to UTC and configure host to do time sync every hour.
 * install tmux and reasonable basic config for it.
@@ -27,29 +27,178 @@
 
 <table>
   <tr>
-    <th>Key</th>
+    <th>Attribute</th>
     <th>Type</th>
     <th>Description</th>
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['base']['bacon']</tt></td>
+    <td><tt>hostname</tt></td>
+    <td>String</td>
+    <td>Which hostname would you like for your host?</td>
+    <td><tt>unassigned.local</tt></td>
+  </tr>
+  <tr>
+    <td><tt>system_user</tt></td>
+    <td>String</td>
+    <td>specify a group for system user. Should correspond to the one of the groups in **groups** field in system user data (See: [Data bags](#data-bags))</td>
+    <td><tt>devops</tt></td>
+  </tr>
+  <tr>
+    <td><tt>bash_d</tt></td>
     <td>Boolean</td>
-    <td>whether to include bacon</td>
+    <td>Should we install infra for .bash.d snippets for system user</td>
     <td><tt>true</tt></td>
   </tr>
+  <tr>
+    <td><tt>delete_validation</tt></td>
+    <td>Boolean</td>
+    <td>Delete validation file from the host. Use with cautions</td>
+    <td><tt>true</tt></td>
+  </tr>
+  <tr>
+    <td><tt>ntp</tt></td>
+    <td>Boolean</td>
+    <td>Installs ntp and enforce time sync every hour</td>
+    <td><tt></tt></td>
+  </tr>
+  <tr>
+    <td><tt>tmux</tt></td>
+    <td>Boolean</td>
+    <td>Determine to install or not install tmux on a target system</td>
+    <td><tt>true</tt></td>
+  </tr>
+  <tr>
+    <td><tt>tmux_prefix_key</tt></td>
+    <td>String</td>
+    <td>tmux prefix_key. It's up to you to change/set</td>
+    <td><tt>C-z</tt></td>
+  </tr>
+  <tr>
+    <td><tt>tmux_cookook</tt></td>
+    <td>String</td>
+    <td>Cookbook with tmux.conf.erb template. Change this value to this cookbook if you want to replace tmux.conf template to your own one.</td>
+    <td><tt>base</tt></td>
+  </tr>
+  <tr>
+    <td><tt>emacs</tt></td>
+    <td>Boolean</td>
+    <td>Install/Doesn't install emacs-nox</td>
+    <td><tt>true</tt></td>
+  </tr>
+  <tr>
+    <td><tt>git</tt></td>
+    <td>Boolean</td>
+    <td>Install/doesn't install git</td>
+    <td><tt>true</tt></td>
+  </tr>
+
 </table>
 
 ### base, bash_d provider
+<table>
+  <tr>
+    <th>Attribute</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td><tt>user</tt></td>
+    <td>String</td>
+    <td>User who will get .bash.d snippets</td>
+    <td>nil<tt></tt></td>
+  </tr>
+  <tr>
+    <td><tt>snippet</tt></td>
+    <td>String</td>
+    <td>Snippet name, and at the same time .sh.erb template name (if template isn't specified)</td>
+    <td><tt>nil</tt></td>
+  </tr>
+  <tr>
+    <td><tt>cookbook</tt></td>
+    <td>String</td>
+    <td>Cookbook that contain snippet.sh.erb template</td>
+    <td><tt>base</tt></td>
+  </tr>
+  <tr>
+    <td><tt>template</tt></td>
+    <td>String</td>
+    <td>snippet template name</td>
+    <td><tt></tt></td>
+  </tr>
+  <tr>
+    <td><tt></tt></td>
+    <td></td>
+    <td></td>
+    <td><tt></tt></td>
+  </tr>
+</table>
 ### base, hostname provider
+<table>
+  <tr>
+    <th>Attribute</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td><tt> </tt></td>
+    <td></td>
+    <td></td>
+    <td><tt></tt></td>
+  </tr>
+</table>
 ### base, ntp provider
+<table>
+  <tr>
+    <th>Attribute</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td><tt> </tt></td>
+    <td></td>
+    <td></td>
+    <td><tt></tt></td>
+  </tr>
+</table>
 ### base, system_user provider
+<table>
+  <tr>
+    <th>Attribute</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td><tt> </tt></td>
+    <td></td>
+    <td></td>
+    <td><tt></tt></td>
+  </tr>
+</table>
 ### base, tmux provider
+<table>
+  <tr>
+    <th>Attribute</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td><tt> </tt></td>
+    <td></td>
+    <td></td>
+    <td><tt></tt></td>
+  </tr>
+</table>
 
 ## Data bags
-Cookbook uses `users` data bag and users cookbook for setup system user.
+Cookbook uses **users** data bag and users cookbook for setup system user.
 
-* You need to create `devop.json` JSON file with similar structure:
+* You need to create **devop.json** JSON file with similar structure:
 
 ```
 {
@@ -62,14 +211,14 @@ Cookbook uses `users` data bag and users cookbook for setup system user.
 }
 ```
 
-to generate password hash for `password` field use command:
+to generate password hash for **password** field use command:
 
 ```
 mkpasswd -m sha-512
 ```
 
-* Add suitable ssh public keys in `ssh_keys` field
-* Set name in `id` field and system user's group in `groups` field.
+* Add suitable ssh public keys in **ssh_keys** field
+* Set name in **id** field and system user's group in **groups** field.
 
 ## Usage
 ### base, default provider
@@ -80,14 +229,14 @@ mkpasswd -m sha-512
 depends 'base', '~> 0.2.7'
 ```
 
-* Create and apply users data bag with system user. See: [Data bags](data-bags).
+* Create and apply users data bag with system user. See: [Data bags](##data-bags).
 * Add provider to your role cookbook, with hostname parameter, like:
 
 ```
 base 'host.local'
 ```
 
-* Switch on or switch off neccessary attributes, if defaults don't suit your needs.
+* Switch on or switch off neccessary attributes, if defaults don't suit your needs. See: [base LWRP attributes](##attributes) for attributes description.
 
 ### base, bash_d provider
 ### base, hostname provider
