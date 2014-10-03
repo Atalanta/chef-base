@@ -9,7 +9,7 @@
 
 * set node hostname
 * set system user
-* set **.bash.d** folder for bash snippets, and include all ***.sh** files from the folder in .bashrc file.
+* create **.bash.d** folder for bash snippets. include all **.sh** files from the folder with include command in **.bashrc** file. Add that include command to the **.bashrc** file.
 * delete validation file for better security (use with caution)
 * set host's timezone to UTC and configure host to do time sync every hour.
 * install tmux and reasonable basic config for it.
@@ -42,7 +42,7 @@
   <tr>
     <td><tt>system_user</tt></td>
     <td>String</td>
-    <td>specify a group for system user. Should correspond to the one of the groups in **groups** field in system user data (See: [Data bags](#databags))</td>
+    <td>specify a group for system user. Should correspond to the one of the groups in **groups** field in system user data (See: **Data bags** chapter)</td>
     <td><tt>devops</tt></td>
   </tr>
   <tr>
@@ -237,7 +237,7 @@ mkpasswd -m sha-512
 depends 'base', '~> 0.2.7'
 ```
 
-* Create and apply users data bag with system user. See: [Data bags](##data-bags).
+* Create and apply users data bag with system user. See: [Data bags](#databags).
 * Add provider to your role cookbook, with hostname parameter, like:
 
 ```
@@ -247,28 +247,75 @@ base 'host.local'
 * Switch on or switch off neccessary attributes, if defaults don't suit your needs. See: [base LWRP attributes](#attributes) for attributes description.
 * See subresources descriptions for better understanding how specific attributes work.
 
-### base, bash_d provider
+### base_bash_d provider
+This provider for creating infra for small bash snippets, that will be executed on user login, and very useful for setupping user's environment variables, bash prompt and so on stuff.
 
-### base, hostname provider
+User attribute (name attribute) defines which user will get **.bash.d** snippet.
 
-### base, ntp provider
+#### Install bash_d
+Add to recipe:
 
-### base, system_user provider
+base_bashd 'username'
 
-### base, tmux provider
+This will:
+
+* create username_home_dir_from_passwd_file/.bash.d folder
+* Add directive to **.bash.rc** file to include any .sh file from ~/.bash.d folder
+
+When bash_d attribute of base provider is enabled, this will happens for system user.
+ 
+#### Create snippet
+To create new snippet, then:
+
+* create erb template for snippet
+* if it has **snippet_name.sh.erb** (snippet_name same as snippet attribute) name it will be used automagically
+* if it has **anyothername.erb** name it need to be specified in template attribute
+
+Add to your recipe:
+
+base_bash_d 'username'
+  snippet 'snippet_name'
+  action :create
+end
+
+This will create **~/.bash.d/snippet_name.sh** snippet in **~/.bash.d** dir, from snippet_name.sh.erb template.
+
+#### Delete snippet
+Add to your recipe:
+
+base_bash_d 'username'
+  snippet 'snippet_name'
+  action :remove
+end
+
+This will remove **~/.bash.d/snippet_name.sh** snippet for user username.
+
+### base_hostname provider
+This provider setups hostname, imediately and permanent.
+
+### base_ntp provider
+
+### base_system_user provider
+
+### base_tmux provider
 
 ## Tests
+Integration tests can be runned via Test Kitchen. 
+
+The default .kitchen.yml assumes that you are testing using the vagrant driver, but if you have AWS or DigitalOcean account, you can change the driver and run the tests on remote hosts. To run the tests, exec:
+
+    bundle install
+    bundle exec kitchen verify
 
 ## Contributing
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
-
-e.g.
-1. Fork the repository on Github
-2. Create a named feature branch (like `add_component_x`)
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Write you change
 4. Write tests for your change (if applicable)
 5. Run the tests, ensuring they all pass
-6. Submit a Pull Request using Github
+6. Commit your changes (`git commit -am 'Added some feature'`)
+7. Push to the branch (`git push origin my-new-feature`)
+8. Create new Pull Request
 
 License and Authors
 -------------------
