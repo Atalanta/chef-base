@@ -22,6 +22,7 @@
 
 * Tested on Ubuntu 14.04
 
+<a name="attributes">
 ## Attributes
 ### base, default provider
 
@@ -41,7 +42,7 @@
   <tr>
     <td><tt>system_user</tt></td>
     <td>String</td>
-    <td>specify a group for system user. Should correspond to the one of the groups in **groups** field in system user data (See: [Data bags](#data-bags))</td>
+    <td>specify a group for system user. Should correspond to the one of the groups in **groups** field in system user data (See: [Data bags](#databags))</td>
     <td><tt>devops</tt></td>
   </tr>
   <tr>
@@ -118,20 +119,20 @@
   <tr>
     <td><tt>cookbook</tt></td>
     <td>String</td>
-    <td>Cookbook that contain snippet.sh.erb template</td>
+    <td>Cookbook that contain snippet's erb template</td>
     <td><tt>base</tt></td>
   </tr>
   <tr>
     <td><tt>template</tt></td>
     <td>String</td>
-    <td>snippet template name</td>
-    <td><tt></tt></td>
+    <td>snippet's erb template name</td>
+    <td><tt>nil</tt></td>
   </tr>
   <tr>
-    <td><tt></tt></td>
-    <td></td>
-    <td></td>
-    <td><tt></tt></td>
+    <td><tt>variables</tt></td>
+    <td>Hash</td>
+    <td>Hash with variables that should be passed to snippets template</td>
+    <td><tt>{}</tt></td>
   </tr>
 </table>
 ### base, hostname provider
@@ -143,10 +144,10 @@
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt> </tt></td>
-    <td></td>
-    <td></td>
-    <td><tt></tt></td>
+    <td><tt>fqdn</tt></td>
+    <td>String</td>
+    <td>Node FQDN.</td>
+    <td><tt>unassigned.local</tt></td>
   </tr>
 </table>
 ### base, ntp provider
@@ -158,10 +159,10 @@
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt> </tt></td>
-    <td></td>
-    <td></td>
-    <td><tt></tt></td>
+    <td><tt>timezone</tt></td>
+    <td>String</td>
+    <td>Node's timezone</td>
+    <td><tt>UTC</tt></td>
   </tr>
 </table>
 ### base, system_user provider
@@ -173,10 +174,10 @@
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt> </tt></td>
-    <td></td>
-    <td></td>
-    <td><tt></tt></td>
+    <td><tt>group</tt></td>
+    <td>String</td>
+    <td>System's user group</td>
+    <td><tt>devops</tt></td>
   </tr>
 </table>
 ### base, tmux provider
@@ -188,13 +189,20 @@
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt> </tt></td>
-    <td></td>
-    <td></td>
-    <td><tt></tt></td>
+    <td><tt>prefix_key</tt></td>
+    <td>String</td>
+    <td>tmux prefix key</td>
+    <td><tt>C-Z</tt></td>
+  </tr>
+  <tr>
+    <td><tt>cookbook</tt></td>
+    <td>String</td>
+    <td>cookbook with tmux.conf.erb template</td>
+    <td><tt>base</tt></td>
   </tr>
 </table>
 
+<a name="databags">
 ## Data bags
 Cookbook uses **users** data bag and users cookbook for setup system user.
 
@@ -236,12 +244,17 @@ depends 'base', '~> 0.2.7'
 base 'host.local'
 ```
 
-* Switch on or switch off neccessary attributes, if defaults don't suit your needs. See: [base LWRP attributes](##attributes) for attributes description.
+* Switch on or switch off neccessary attributes, if defaults don't suit your needs. See: [base LWRP attributes](#attributes) for attributes description.
+* See subresources descriptions for better understanding how specific attributes work.
 
 ### base, bash_d provider
+
 ### base, hostname provider
+
 ### base, ntp provider
+
 ### base, system_user provider
+
 ### base, tmux provider
 
 ## Tests
