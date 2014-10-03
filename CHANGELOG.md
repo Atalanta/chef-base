@@ -2,6 +2,14 @@
 
 This file is used to list changes made in each version of base.
 
+## 0.2.9
+
+- Add: Cookbook documentation
+
+## 0.2.8
+
+- Add: ntp attribute, time sync and time zone setup functionality tests.
+
 ## 0.2.7
 
 - Add: Installing ntpd and setting host clocks to UTC

@@ -36,7 +36,7 @@
   <tr>
     <td><tt>hostname</tt></td>
     <td>String</td>
-    <td>Which hostname would you like for your host?</td>
+    <td>Setups node's hostname. Hostname should be in fqdn. Part before first dot used as a hostname. It's name attribute for base LWRP.</td>
     <td><tt>unassigned.local</tt></td>
   </tr>
   <tr>
@@ -291,13 +291,48 @@ end
 This will remove **~/.bash.d/snippet_name.sh** snippet for user username.
 
 ### base_hostname provider
-This provider setups hostname, imediately and permanent.
+This provider setups hostname.
+
+Example of usage, Add to your recipe:
+
+    base_hostname 'host1.project.local'
+
+This will setup node's hostname to host1 and add host1.project.local to /etc/hosts file. 
 
 ### base_ntp provider
+This provider configure nodes timezone and sync time every hour with `ntpd -q` command.
+
+Name attribute of the provider is timezone. See for timezones names in **/usr/share/zoneinfo** dir.
+
+Example of usage, Add to your recipe:
+
+    base_ntp 'Asia/Bangkok'
+
+This will set timezone to 'Asia/Bangkok' and enforce time sync every hour.
 
 ### base_system_user provider
+This provider setups system user, that can be used DevOps team for accessing nodes.
+
+* It uses **users** [data bag](#databags) to configure system user name, system user's group, shell, comment, password and authorzied ssh keys
+* group attribute maps to system_user attribute of base provider.  
+* It provides passwordless sudo for system user
+* It uses **sudo** and **users** cookbook.
+
+Example of usage, Add to your recipe:
+
+    base_system_user 'atalanta'
 
 ### base_tmux provider
+This provider installs tmux and upload reasonable tmux config to host.
+
+* tmux config comes from **tmux.conf.erb** template and installed to **/etc/tmux.conf**
+* if you overrides cookbook attribute, you can create your own **tmux.conf.erb** template and install it from your cookbook.
+
+Example of usage, Add to your recipe:
+
+base_tmux 'C-a' do
+  cookbook 'my_cookbook'
+end
 
 ## Tests
 Integration tests can be runned via Test Kitchen. 
